@@ -5,6 +5,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      active: null,
       name: '',
       status: '',
       age: '',
@@ -26,6 +27,7 @@ class App extends Component {
     };
 
     const onChange = (e) => {
+      console.log('ssss');
       this.setState({
         [e.target.name]: e.target.value,
       });
@@ -38,22 +40,29 @@ class App extends Component {
         status: this.state.status,
         Age: this.state.age,
       };
-      this.setState({
-        data: {
-          ...this.state.data,
-          dataList: [...this.state.data.dataList, newData],
-        },
-        name: '',
-        status: '',
-        age: '',
-      });
+      this.state.name.length > 0 ?
+        this.setState({
+          data: {
+            ...this.state.data,
+            dataList: [...this.state.data.dataList, newData],
+          },
+          name: '',
+          status: '',
+          age: '',
+        }) : alert('Please Fill the input')
     };
+
+    const onEdit = (id) => {
+      this.setState({active:id})
+    }
+
+
     return (
       <div className='wrapper'>
         <table border='1' width='100%'>
-          <thead>
+          <thead >
             <tr>
-              <th>ID</th>
+              <th >ID</th>
               <th>Name</th>
               <th>Status</th>
               <th>Age</th>
@@ -61,14 +70,21 @@ class App extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.data.dataList.map(({ id, name, status, Age }) => (
+            {this.state.data.dataList.map(( { id, name, status, Age },) => (
               <tr key={id}>
-                <td>{id}</td>
+                <td>
+                  {
+                    this.state.active === id ? <input value={id}/> : id
+                  }
+                </td>
                 <td>{name}</td>
                 <td>{status}</td>
                 <td>{Age}</td>
                 <td>
                   <button onClick={() => onDelete(id)}>delete</button>
+                  <button onClick={() => onEdit(id)}>
+                    {this.state.active === id ? 'save' : 'edit'}
+                  </button>
                 </td>
               </tr>
             ))}
@@ -78,7 +94,6 @@ class App extends Component {
           onChange={onChange}
           placeholder='name'
           type='text'
-          required
           name='name'
           value={this.state.name}
         />
@@ -88,7 +103,6 @@ class App extends Component {
           type='text'
           name='status'
           value={this.state.status}
-          required
         />
         <input
           onChange={onChange}

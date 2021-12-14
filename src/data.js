@@ -2,13 +2,13 @@ export const Data = [
   {
     id: 1,
     name: 'Qobiljon',
-        status: 'Student',
-        Age:20
+    status: 'Student',
+    Age:20
   },
   {
     id: 2,
     name: 'Toshmat',
-      status: 'Mentor',
+    status: 'Mentor',
     Age:21
   },
   {
@@ -20,7 +20,11 @@ export const Data = [
   {
     id: 4,
     name: 'MIke',
-      status: 'Lawyer',
+    status: 'mentor',
     Age:18
   },
 ];
+
+
+
+
