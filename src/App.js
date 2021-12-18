@@ -16,6 +16,7 @@ class App extends Component {
   }
 
   render() {
+    
     const onDelete = (id) => {
       let res = this.state.data.dataList.filter((item) => item.id !== id);
       this.setState({
@@ -27,7 +28,6 @@ class App extends Component {
     };
 
     const onChange = (e) => {
-      console.log('ssss');
       this.setState({
         [e.target.name]: e.target.value,
       });
